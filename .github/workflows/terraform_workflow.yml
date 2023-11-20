@@ -19,6 +19,10 @@ jobs:
           echo "export TF_VAR_gh_repo=${{ secrets.GH_REPO }}" >> $GITHUB_ENV
           echo "export TF_VAR_gh_token=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
 
+      - name: Display GitHub repository information
+        run: |
+          echo "GitHub Repository: $TF_VAR_gh_username/$TF_VAR_gh_repo"
+
       - name: Set up Terraform
         run: |
           terraform init -input=false
