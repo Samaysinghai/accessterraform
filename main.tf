@@ -1,20 +1,16 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = "3.73.0"
-    }
-  }
-}
-module aci {
-   source = "git::https://github.com/Samaysinghai/repofortf.git"  
-}
-provider "azurerm" {
-  features {}
+provider "github" {
+  owner = var.gh_username
+  token = var.gh_token
 }
 
-resource "azurerm_resource_group" "mytfRG" {
-  name     = "mytfRG"
-  location = "East US"  
+data "github_repository" "current" {
+  full_name = "${var.gh_username}/${var.gh_repo}"
 }
 
+output "repository_url" {
+  value = data.github_repository.current.html_url
+}
+
+output "repository_ssh_url" {
+  value = data.github_repository.current.ssh_url
+}
