@@ -6,7 +6,9 @@ terraform {
     }
   }
 }
-
+module aci {
+   source = "git::https://github.com/Samaysinghai/repofortf.git"  
+}
 provider "azurerm" {
   features {}
 }
@@ -15,6 +17,4 @@ resource "azurerm_resource_group" "mytfRG" {
   name     = "mytfRG"
   location = "East US"  
 }
-
-
 
