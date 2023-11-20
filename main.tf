@@ -1,7 +1,7 @@
 provider "github" {
   owner = var.gh_username
   token = var.gh_token
-}
+} 
 
 data "github_repository" "current" {
   full_name = "${var.gh_username}/${var.gh_repo}"
