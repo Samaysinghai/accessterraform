@@ -1,0 +1,29 @@
+name: Terraform Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up GitHub repository information
+        run: |
+          echo "export TF_VAR_gh_username=${{ secrets.GH_USERNAME }}" >> $GITHUB_ENV
+          echo "export TF_VAR_gh_repo=${{ secrets.GH_REPO }}" >> $GITHUB_ENV
+          echo "export TF_VAR_gh_token=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Set up Terraform
+        run: |
+          terraform init -input=false
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      # Add more steps as needed for apply, destroy, etc.
